@@ -3,6 +3,7 @@ package com.o9uzdev.javaFxChartsCircleAnimation;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -11,6 +12,15 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Pane pane = new Pane();
         Circle circle = new Circle(100,100,50);
+        circle.setFill(Color.BLUEVIOLET);
+        circle.setFocusTraversable(true);
+        //when focusTraversable property is true focus can be moved to circle
+
+        circle.setOnMouseClicked(event -> circle.requestFocus());
+        circle.setOnMouseDragged(e -> {
+            circle.setCenterX(e.getX());
+            circle.setCenterY(e.getY());
+        });
 
         pane.getChildren().addAll(circle);
 
