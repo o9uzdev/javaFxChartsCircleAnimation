@@ -1,10 +1,16 @@
 package com.o9uzdev.javaFxChartsCircleAnimation;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -47,7 +53,21 @@ public class App extends Application {
 
         pane.getChildren().addAll(circle);
 
-        stage.setScene(new Scene(pane, 640, 480));
+        Button btnShrink = new Button("Shrink");
+        Button btnEnlarge = new Button("Enlarge");
+        btnEnlarge.setFocusTraversable(false);
+        btnShrink.setFocusTraversable(false);
+        btnShrink.setOnAction(event -> circle.setRadius(circle.getRadius() - 5));
+        btnEnlarge.setOnAction(event -> circle.setRadius(circle.getRadius() + 5));
+        HBox btnBox = new HBox();
+        btnBox.getChildren().addAll(btnShrink, btnEnlarge);
+        btnBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        BorderPane root = new BorderPane();
+        root.setCenter(pane);
+        root.setBottom(btnBox);
+
+        stage.setScene(new Scene(root, 640, 480));
         stage.setTitle("JavaFx Charts Circle Animation");
         stage.show();
     }
